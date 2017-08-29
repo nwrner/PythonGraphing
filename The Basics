@@ -78,5 +78,23 @@ plt.title('Interesting Graph')
 plt.show()
 plt.show()
 
+############ Pulling from File #############
+import matplotlib.pyplot as plt
+from random import *
+import numpy as np
+import csv
+#New Way 
 
+out=open('example.csv', 'w')
+num=0
+data=50
+while num!=100000:
+        out.write(str(num) + ":" + str(randint(0,1000000)) + '\n')
+        num+=1
+
+
+if num==100000:
+        out.close()
+
+x, y = np.loadtxt('example.csv', delimiter=':', unpack=True)
 
