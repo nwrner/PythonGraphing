@@ -172,3 +172,31 @@ for line in data:
 
 print(data_di)
 '''
+
+########### PANDAS ITERATION 2 ############
+#Read the CSV file into Python and assign that to a data set. 
+df = pd.read_csv('C:\\Users\\Nick\\Desktop\\Python\\FMAC-HPI_DENCO.csv')
+
+#Gets rid of the counter next to each line but has the side effect
+#of swapping the columns if desired by swapping the title of two rows with eachother. ¯\_(ツ)_/¯
+df.set_index('Date', inplace=True)
+
+#Take the data from that opened file, apply any changes made there ^ and put into a new file called newcsv2.csv. 
+df.to_csv('C:\\Users\\Nick\\Desktop\\Python\\newcsv2.csv')
+
+#Open that file ^ and assign it an index of 0.
+df=pd.read_csv('C:\\Users\\Nick\\Desktop\\Python\\newcsv2.csv', index_col=0)
+#Rename the column with the new index to 'Denver_HPI'. 
+df.columns = ['Denver_HPI']
+
+#Take the data from that opened file, apply any changes made there ^ and put into a new file called newcsv3.csv.
+df.to_csv('C:\\Users\\Nick\\Desktop\\Python\\header.csv')
+#Remove any headers and just give the data.
+df.to_csv('C:\\Users\\Nick\\Desktop\\Python\\header_no.csv', header=False)
+#Add headers to a file that doesn't have any.
+df = pd.read_csv('C:\\Users\\Nick\\Desktop\\Python\\header_no.csv', names=['Date','Denver_HPI'])
+#Renaming column name 
+df.rename(columns={'Denver_HPI':'77075_HPI'}, inplace=True)
+df.to_csv("C:\\Users\\Nick\\Desktop\\Python\\header_change.csv")
+#Exporting data to HTML
+df.to_html('C:\\Users\\Nick\\Desktop\\Python\\example.html')
