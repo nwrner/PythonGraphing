@@ -117,3 +117,58 @@ web_stats = {'Day':[1,2,3,4,5,6],
 df = pd.DataFrame(web_stats)
 df.set_index('Day', inplace=True)
 print(df.Buyers)
+
+
+######### PANDAS ITERATION 1 #############
+import pandas as pd
+import datetime
+import numpy as np
+import pandas_datareader as web
+import matplotlib.pyplot as plt
+from matplotlib import style
+
+style.use('ggplot')
+
+web_stats = {'Day':[1,2,3,4,5,6],
+             'Visitors':[43,53,34,45,64,34],
+             'Bounce Rate':[65,72,62,64,54,66],
+             'Buyers':[11,22,33,44,55,66]
+             }
+
+df = pd.DataFrame(web_stats)
+df.set_index('Day', inplace=True)
+print(df)
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Information Storehouse
+
+#df.set_index('1', inplace=True)
+#print(df.Buyers)
+#print(df[['Bounce Rate','Buyers']])
+#visitors=df.Visitors.tolist()
+#print(np.array(df[['Bounce Rate','Visitors']]))
+
+
+#Progressionist Pit
+'''
+file=input("Access what file?: ")
+data_di={}
+data=open(file,'r')
+
+for line in data:
+    (key,val) = line.split()
+    data_di[int(key)]=val
+
+print(data_di)
+'''
