@@ -285,3 +285,46 @@ merged = pd.merge(df1, df3, on = "Year", how="outer" )
 merged.set_index('Year', inplace=True)
 print(merged)
 
+#############Pickling and Intermediate Importation###########  
+import quandl
+import pandas as pd
+import pickle 
+api_key='RZxXTz8kkfTXooDi3vzx'
+#fiddy_states=["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]
+
+
+def state_list():
+    fiddy_states = pd.read_html('https://simple.wikipedia.org/wiki/List_of_U.S._states')
+    return fiddy_states[0][0][1:]
+
+def grab_initial_state_data():
+    states=state_list()
+    main_df=pd.DataFrame()
+
+    for abbv in states:
+        #print(abbv)
+        query= "FMAC/HPI_"+str(abbv)
+        df= quandl.get(query, authtoken=api_key)
+        df.columns = [str(abbv)]
+        if main_df.empty:
+            main_df=df
+        else:
+            main_df=main_df.join(df)
+
+    #print(main_df)    
+    #pickle_out = open ("fiddy_states.pickle", "wb")
+    #pickle.dump(main_df, pickle_out)
+    #pickle_out.close()
+    main_df.to_pickle('main.pickle')
+    main_data=pd.read_pickle('C:\\Users\\Nick\\Desktop\\Python\\main.pickle')
+    print(main_data)
+    
+        
+grab_initial_state_data()
+#pickle_in = open ("fiddy_states.pickle", "rb")
+#HPI_data = pickle.load(pickle_in)
+#print(HPI_data)
+
+#print(main_data)
+#print(main_df.head())
+#main_df.to_csv('C:\\Users\\Nick\\Desktop\Python\stateout.csv')
