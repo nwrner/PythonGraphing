@@ -200,3 +200,18 @@ df.rename(columns={'Denver_HPI':'77075_HPI'}, inplace=True)
 df.to_csv("C:\\Users\\Nick\\Desktop\\Python\\header_change.csv")
 #Exporting data to HTML
 df.to_html('C:\\Users\\Nick\\Desktop\\Python\\example.html')
+
+import pandas as pd
+import quandl
+api_key='RZxXTz8kkfTXooDi3vzx'
+df=quandl.get('FMAC/HPI_AK', auth_token=api_key)
+df2=quandl.get('FMAC/HPI_HI', auth_token=api_key)
+#print("======== ALASKA ========") 
+#print(df.tail())
+#print('========= DENVER ==========')
+#print(df2.tail())
+
+fiddy_states=["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]
+for x in fiddy_states:
+    print("FMAC/HPI_"+str(x))
+    df2=quandl.get("FMAC/HPI_"+str(x))
